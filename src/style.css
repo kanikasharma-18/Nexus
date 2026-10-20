@@ -1,0 +1,42 @@
+:root {
+  font-family: Arial, sans-serif;
+  color: #1f2937;
+  background: #eef2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.welcome-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.app-name {
+  margin: 0;
+  color: #4f46e5;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.welcome-screen p:last-child {
+  margin: 0;
+  color: #6b7280;
+  font-size: 1.1rem;
+}

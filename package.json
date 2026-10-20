@@ -1,0 +1,23 @@
+{
+  "name": "nexus",
+  "version": "1.0.0",
+  "description": "A simple desktop application built with Electron, React, and Vite.",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "concurrently": "^9.2.1",
+    "electron": "^38.2.2",
+    "vite": "^7.1.7",
+    "wait-on": "^8.0.4"
+  },
+  "license": "ISC"
+}
