@@ -69,8 +69,57 @@ select {
 .app-shell {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   background: #111315;
+}
+
+.sidebar {
+  width: 220px;
+  flex: 0 0 220px;
+  padding: 1.5rem 1rem;
+  border-right: 1px solid #2c3236;
+  background: #171a1d;
+}
+
+.sidebar-brand {
+  padding: 0.5rem 0.75rem 2rem;
+  color: #9cc7c2;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.24em;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sidebar-item {
+  width: 100%;
+  border-color: transparent;
+  padding: 0.7rem 0.75rem;
+  color: #a4adb4;
+  text-align: left;
+  background: transparent;
+}
+
+.sidebar-item:hover {
+  border-color: #3a4248;
+  background: #252a2e;
+}
+
+.sidebar-item.active {
+  border-color: #426a67;
+  color: #e5f2f0;
+  background: #29413f;
+}
+
+.app-workspace {
+  min-width: 0;
+  min-height: 100vh;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .app-header {
@@ -119,7 +168,7 @@ select {
   background: #191d20;
 }
 
-.eyebrow {
+.welcome-label {
   margin: 0;
   color: #9cc7c2;
   font-size: 0.8rem;
@@ -142,6 +191,16 @@ h1 {
 }
 
 @media (max-width: 600px) {
+  .sidebar {
+    width: 180px;
+    flex-basis: 180px;
+    padding: 1rem 0.75rem;
+  }
+
+  .sidebar-brand {
+    padding-bottom: 1.5rem;
+  }
+
   .app-header {
     padding: 0 1.25rem;
   }
