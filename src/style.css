@@ -151,6 +151,81 @@ select {
   padding: clamp(1.5rem, 5vw, 4rem);
 }
 
+.dashboard {
+  width: min(100%, 960px);
+  margin: 0 auto;
+}
+
+.dashboard-welcome,
+.dashboard-overview,
+.workspace-overview {
+  padding: 1.5rem;
+  border: 1px solid #2c3236;
+  border-radius: 12px;
+  background: #191d20;
+}
+
+.dashboard-welcome {
+  text-align: left;
+}
+
+.dashboard-welcome h1 {
+  margin: 0.35rem 0 0.75rem;
+}
+
+.dashboard-welcome > p {
+  margin: 0;
+  color: #a4adb4;
+}
+
+.dashboard-welcome .dashboard-introduction {
+  margin-top: 0.75rem;
+  color: #c0c7cc;
+}
+
+.dashboard-overview {
+  margin-top: 1.25rem;
+}
+
+.dashboard h2 {
+  margin: 0 0 1rem;
+  color: #f3f4f6;
+  font-size: 1.1rem;
+}
+
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.overview-card {
+  padding: 1rem;
+  border: 1px solid #3a4248;
+  border-radius: 8px;
+  background: #252a2e;
+}
+
+.overview-card p {
+  margin: 0 0 0.75rem;
+  color: #a4adb4;
+}
+
+.overview-card strong {
+  color: #9cc7c2;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.workspace-overview {
+  margin-top: 1.25rem;
+}
+
+.workspace-overview p {
+  margin: 0;
+  color: #a4adb4;
+}
+
 .welcome-screen {
   width: min(100%, 960px);
   min-height: 360px;
@@ -211,6 +286,10 @@ h1 {
 
   .app-content {
     padding: 1rem;
+  }
+
+  .overview-cards {
+    grid-template-columns: 1fr;
   }
 
   .welcome-screen {

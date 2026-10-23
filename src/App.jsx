@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Dashboard from './components/Dashboard.jsx';
 import Sidebar from './components/Sidebar.jsx';
 
 function App() {
@@ -17,11 +18,15 @@ function App() {
         </header>
 
         <main className="app-content">
-          <section className="welcome-screen">
-            <p className="welcome-label">Welcome</p>
-            <h1>Your personal workspace</h1>
-            <p>NEXUS Desktop</p>
-          </section>
+          {activeSection === 'Home' ? (
+            <Dashboard />
+          ) : (
+            <section className="welcome-screen">
+              <p className="welcome-label">Welcome</p>
+              <h1>Your personal workspace</h1>
+              <p>NEXUS Desktop</p>
+            </section>
+          )}
         </main>
       </div>
     </div>
