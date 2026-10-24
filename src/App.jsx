@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dashboard from './components/Dashboard.jsx';
 import Notes from './components/Notes.jsx';
 import Sidebar from './components/Sidebar.jsx';
@@ -8,6 +8,61 @@ function App() {
   const [activeSection, setActiveSection] = useState('Home');
   const [tasks, setTasks] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
+  const [saveError, setSaveError] = useState('');
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadSavedData() {
+      try {
+        const result = await window.nexus.loadData();
+
+        if (!result.success) {
+          throw new Error(result.error);
+        }
+
+        if (isMounted) {
+          setTasks(result.data.tasks);
+          setNotes(result.data.notes);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setLoadError(error.message);
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadSavedData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isLoading || loadError) {
+      return;
+    }
+
+    async function saveData() {
+      const result = await window.nexus.saveData({ tasks, notes });
+
+      if (!result.success) {
+        setSaveError(result.error);
+        return;
+      }
+
+      setSaveError('');
+    }
+
+    saveData().catch((error) => {
+      setSaveError(error.message);
+    });
+  }, [tasks, notes, isLoading, loadError]);
 
   function addTask(text) {
     setTasks((currentTasks) => [
@@ -59,6 +114,25 @@ function App() {
     );
   }
 
+  if (isLoading) {
+    return (
+      <main className="welcome-screen">
+        <p className="welcome-label">NEXUS</p>
+        <h1>Loading your workspace</h1>
+      </main>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <main className="welcome-screen">
+        <p className="welcome-label">NEXUS</p>
+        <h1>Unable to load your workspace</h1>
+        <p>{loadError}</p>
+      </main>
+    );
+  }
+
   return (
     <div className="app-shell">
       <Sidebar
@@ -68,7 +142,9 @@ function App() {
 
       <div className="app-workspace">
         <header className="app-header">
-          <span className="app-status">Desktop workspace</span>
+          <span className="app-status">
+            {saveError || 'Desktop workspace'}
+          </span>
         </header>
 
         <main className="app-content">
