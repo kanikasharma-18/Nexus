@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-function Notes() {
+function Notes({ notes, onAddNote, onUpdateNote, onDeleteNote }) {
   const [noteTitle, setNoteTitle] = useState('');
   const [noteContent, setNoteContent] = useState('');
-  const [notes, setNotes] = useState([]);
+  const [editingNoteId, setEditingNoteId] = useState(null);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -15,16 +15,31 @@ function Notes() {
       return;
     }
 
-    setNotes((currentNotes) => [
-      ...currentNotes,
-      {
-        id: crypto.randomUUID(),
-        title,
-        content,
-      },
-    ]);
+    if (editingNoteId) {
+      onUpdateNote(editingNoteId, title, content);
+    } else {
+      onAddNote(title, content);
+    }
+
     setNoteTitle('');
     setNoteContent('');
+    setEditingNoteId(null);
+  }
+
+  function handleEdit(note) {
+    setNoteTitle(note.title);
+    setNoteContent(note.content);
+    setEditingNoteId(note.id);
+  }
+
+  function handleDelete(noteId) {
+    onDeleteNote(noteId);
+
+    if (editingNoteId === noteId) {
+      setNoteTitle('');
+      setNoteContent('');
+      setEditingNoteId(null);
+    }
   }
 
   return (
@@ -35,7 +50,10 @@ function Notes() {
         <p>Capture your thoughts in one place.</p>
       </div>
 
-      <form className="note-form" onSubmit={handleSubmit}>
+      <form
+        className={`note-form${editingNoteId ? ' editing' : ''}`}
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="note-title">Title</label>
         <input
           id="note-title"
@@ -54,7 +72,9 @@ function Notes() {
           rows="6"
         />
 
-        <button type="submit">Save Note</button>
+        <button type="submit">
+          {editingNoteId ? 'Update Note' : 'Save Note'}
+        </button>
       </form>
 
       <section className="saved-notes" aria-labelledby="saved-notes-heading">
@@ -65,7 +85,25 @@ function Notes() {
           <div className="notes-list">
             {notes.map((note) => (
               <article className="note-card" key={note.id}>
-                {note.title && <h3>{note.title}</h3>}
+                <div className="note-card-header">
+                  {note.title && <h3>{note.title}</h3>}
+                  <div className="note-card-actions">
+                    <button
+                      className="edit-note-button"
+                      type="button"
+                      onClick={() => handleEdit(note)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-note-button"
+                      type="button"
+                      onClick={() => handleDelete(note.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
                 {note.content && <p>{note.content}</p>}
               </article>
             ))}

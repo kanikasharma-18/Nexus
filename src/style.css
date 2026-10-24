@@ -271,6 +271,10 @@ select {
   background: #34534f;
 }
 
+.note-form.editing {
+  border-color: #426a67;
+}
+
 .saved-notes {
   margin-top: 1.25rem;
 }
@@ -298,10 +302,53 @@ select {
   background: #191d20;
 }
 
+.note-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .note-card h3 {
+  min-width: 0;
   margin: 0 0 0.5rem;
   color: #e5f2f0;
   font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.note-card-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.35rem;
+}
+
+.edit-note-button,
+.delete-note-button {
+  border-color: transparent;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+.edit-note-button {
+  color: #9cc7c2;
+  background: transparent;
+}
+
+.edit-note-button:hover {
+  border-color: #426a67;
+  background: #29413f;
+}
+
+.delete-note-button {
+  color: #89939b;
+  background: transparent;
+}
+
+.delete-note-button:hover {
+  border-color: #6b4545;
+  color: #e5b5b5;
+  background: #332629;
 }
 
 .note-card p {
@@ -377,6 +424,10 @@ select {
 
   .task-label {
     flex: 1;
+  }
+
+  .note-card-header {
+    flex-direction: column;
   }
 }
 

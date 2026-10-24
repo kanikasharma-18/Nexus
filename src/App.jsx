@@ -7,6 +7,7 @@ import Tasks from './components/Tasks.jsx';
 function App() {
   const [activeSection, setActiveSection] = useState('Home');
   const [tasks, setTasks] = useState([]);
+  const [notes, setNotes] = useState([]);
 
   function addTask(text) {
     setTasks((currentTasks) => [
@@ -31,6 +32,33 @@ function App() {
     );
   }
 
+  function addNote(title, content) {
+    setNotes((currentNotes) => [
+      ...currentNotes,
+      {
+        id: crypto.randomUUID(),
+        title,
+        content,
+      },
+    ]);
+  }
+
+  function updateNote(noteId, title, content) {
+    setNotes((currentNotes) =>
+      currentNotes.map((note) =>
+        note.id === noteId
+          ? { ...note, title, content }
+          : note
+      )
+    );
+  }
+
+  function deleteNote(noteId) {
+    setNotes((currentNotes) =>
+      currentNotes.filter((note) => note.id !== noteId)
+    );
+  }
+
   return (
     <div className="app-shell">
       <Sidebar
@@ -45,7 +73,7 @@ function App() {
 
         <main className="app-content">
           {activeSection === 'Home' ? (
-            <Dashboard tasks={tasks} />
+            <Dashboard tasks={tasks} notes={notes} />
           ) : activeSection === 'Tasks' ? (
             <Tasks
               tasks={tasks}
@@ -54,7 +82,12 @@ function App() {
               onDeleteTask={deleteTask}
             />
           ) : activeSection === 'Notes' ? (
-            <Notes />
+            <Notes
+              notes={notes}
+              onAddNote={addNote}
+              onUpdateNote={updateNote}
+              onDeleteNote={deleteNote}
+            />
           ) : (
             <section className="welcome-screen">
               <p className="welcome-label">Welcome</p>

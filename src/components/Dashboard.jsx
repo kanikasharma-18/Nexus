@@ -1,9 +1,9 @@
-function Dashboard({ tasks }) {
+function Dashboard({ tasks, notes }) {
   const completedTaskCount = tasks.filter((task) => task.completed).length;
   const overviewCards = [
     { label: 'Total Tasks', value: tasks.length },
     { label: 'Completed Tasks', value: completedTaskCount },
-    { label: 'Saved Notes', value: 0 },
+    { label: 'Saved Notes', value: notes.length },
   ];
 
   return (
