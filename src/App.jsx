@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Dashboard from './components/Dashboard.jsx';
+import Files from './components/Files.jsx';
 import Notes from './components/Notes.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Tasks from './components/Tasks.jsx';
@@ -164,6 +165,8 @@ function App() {
               onUpdateNote={updateNote}
               onDeleteNote={deleteNote}
             />
+          ) : activeSection === 'Files' ? (
+            <Files />
           ) : (
             <section className="welcome-screen">
               <p className="welcome-label">Welcome</p>

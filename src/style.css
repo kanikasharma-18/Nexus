@@ -178,6 +178,11 @@ select {
   margin: 0 auto;
 }
 
+.files {
+  width: min(100%, 960px);
+  margin: 0 auto;
+}
+
 .tasks-header {
   padding: 1.5rem;
   border: 1px solid #2c3236;
@@ -237,6 +242,68 @@ select {
 .notes-header > p:last-child {
   margin: 0;
   color: #a4adb4;
+}
+
+.files-header {
+  padding: 1.5rem;
+  border: 1px solid #2c3236;
+  border-radius: 12px;
+  background: #191d20;
+}
+
+.files-header h1 {
+  margin: 0.35rem 0 0.75rem;
+}
+
+.files-header > p:last-child {
+  margin: 0;
+  color: #a4adb4;
+}
+
+.file-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid #2c3236;
+  border-radius: 12px;
+  background: #191d20;
+}
+
+.file-selector button {
+  border-color: #426a67;
+  background: #29413f;
+}
+
+.file-selector button:hover:not(:disabled) {
+  background: #34534f;
+}
+
+.file-selector button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.files-empty,
+.selected-file,
+.file-error {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.files-empty,
+.selected-file {
+  color: #a4adb4;
+}
+
+.selected-file strong {
+  color: #e5f2f0;
+}
+
+.file-error {
+  color: #e5b5b5;
 }
 
 .note-form {

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const fs = require('fs').promises;
 const path = require('path');
 
@@ -113,6 +113,30 @@ ipcMain.handle('save-data', async (_event, data) => {
     return {
       success: false,
       error: 'Data could not be saved.',
+    };
+  }
+});
+
+ipcMain.handle('select-file', async (event) => {
+  try {
+    const parentWindow = BrowserWindow.fromWebContents(event.sender);
+    const result = await dialog.showOpenDialog(parentWindow, {
+      properties: ['openFile'],
+    });
+
+    if (result.canceled || result.filePaths.length === 0) {
+      return { success: true, canceled: true };
+    }
+
+    return {
+      success: true,
+      canceled: false,
+      fileName: path.basename(result.filePaths[0]),
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: 'The file selection dialog could not be opened.',
     };
   }
 });
