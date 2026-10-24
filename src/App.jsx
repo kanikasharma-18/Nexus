@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Dashboard from './components/Dashboard.jsx';
+import Notes from './components/Notes.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Tasks from './components/Tasks.jsx';
 
@@ -52,6 +53,8 @@ function App() {
               onToggleTask={toggleTask}
               onDeleteTask={deleteTask}
             />
+          ) : activeSection === 'Notes' ? (
+            <Notes />
           ) : (
             <section className="welcome-screen">
               <p className="welcome-label">Welcome</p>

@@ -173,6 +173,11 @@ select {
   margin: 0 auto;
 }
 
+.notes {
+  width: min(100%, 960px);
+  margin: 0 auto;
+}
+
 .tasks-header {
   padding: 1.5rem;
   border: 1px solid #2c3236;
@@ -216,6 +221,94 @@ select {
 
 .tasks-empty {
   color: #a4adb4;
+}
+
+.notes-header {
+  padding: 1.5rem;
+  border: 1px solid #2c3236;
+  border-radius: 12px;
+  background: #191d20;
+}
+
+.notes-header h1 {
+  margin: 0.35rem 0 0.75rem;
+}
+
+.notes-header > p:last-child {
+  margin: 0;
+  color: #a4adb4;
+}
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid #2c3236;
+  border-radius: 12px;
+  background: #191d20;
+}
+
+.note-form label {
+  color: #c0c7cc;
+  font-size: 0.9rem;
+}
+
+.note-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.note-form button {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  border-color: #426a67;
+  background: #29413f;
+}
+
+.note-form button:hover {
+  background: #34534f;
+}
+
+.saved-notes {
+  margin-top: 1.25rem;
+}
+
+.saved-notes h2 {
+  margin: 0 0 1rem;
+  color: #f3f4f6;
+  font-size: 1.1rem;
+}
+
+.notes-empty {
+  margin: 0;
+  color: #a4adb4;
+}
+
+.notes-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.note-card {
+  padding: 1rem;
+  border: 1px solid #2c3236;
+  border-radius: 8px;
+  background: #191d20;
+}
+
+.note-card h3 {
+  margin: 0 0 0.5rem;
+  color: #e5f2f0;
+  font-size: 1rem;
+}
+
+.note-card p {
+  margin: 0;
+  color: #c0c7cc;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
 
 .task-list {
