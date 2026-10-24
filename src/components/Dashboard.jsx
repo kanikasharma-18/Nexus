@@ -1,10 +1,11 @@
-const overviewCards = [
-  { label: 'Total Tasks', value: 0 },
-  { label: 'Completed Tasks', value: 0 },
-  { label: 'Saved Notes', value: 0 },
-];
+function Dashboard({ tasks }) {
+  const completedTaskCount = tasks.filter((task) => task.completed).length;
+  const overviewCards = [
+    { label: 'Total Tasks', value: tasks.length },
+    { label: 'Completed Tasks', value: completedTaskCount },
+    { label: 'Saved Notes', value: 0 },
+  ];
 
-function Dashboard() {
   return (
     <div className="dashboard">
       <section className="dashboard-welcome">

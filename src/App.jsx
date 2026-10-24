@@ -5,6 +5,30 @@ import Tasks from './components/Tasks.jsx';
 
 function App() {
   const [activeSection, setActiveSection] = useState('Home');
+  const [tasks, setTasks] = useState([]);
+
+  function addTask(text) {
+    setTasks((currentTasks) => [
+      ...currentTasks,
+      { id: crypto.randomUUID(), text, completed: false },
+    ]);
+  }
+
+  function toggleTask(taskId) {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === taskId
+          ? { ...task, completed: !task.completed }
+          : task
+      )
+    );
+  }
+
+  function deleteTask(taskId) {
+    setTasks((currentTasks) =>
+      currentTasks.filter((task) => task.id !== taskId)
+    );
+  }
 
   return (
     <div className="app-shell">
@@ -20,9 +44,14 @@ function App() {
 
         <main className="app-content">
           {activeSection === 'Home' ? (
-            <Dashboard />
+            <Dashboard tasks={tasks} />
           ) : activeSection === 'Tasks' ? (
-            <Tasks />
+            <Tasks
+              tasks={tasks}
+              onAddTask={addTask}
+              onToggleTask={toggleTask}
+              onDeleteTask={deleteTask}
+            />
           ) : (
             <section className="welcome-screen">
               <p className="welcome-label">Welcome</p>

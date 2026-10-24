@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-function Tasks() {
+function Tasks({ tasks, onAddTask, onToggleTask, onDeleteTask }) {
   const [taskInput, setTaskInput] = useState('');
-  const [tasks, setTasks] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -12,10 +11,7 @@ function Tasks() {
       return;
     }
 
-    setTasks((currentTasks) => [
-      ...currentTasks,
-      { id: Date.now(), text },
-    ]);
+    onAddTask(text);
     setTaskInput('');
   }
 
@@ -46,7 +42,26 @@ function Tasks() {
       ) : (
         <ul className="task-list">
           {tasks.map((task) => (
-            <li key={task.id}>{task.text}</li>
+            <li
+              className={`task-row${task.completed ? ' completed' : ''}`}
+              key={task.id}
+            >
+              <label className="task-label">
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => onToggleTask(task.id)}
+                />
+                <span>{task.text}</span>
+              </label>
+              <button
+                className="delete-task-button"
+                type="button"
+                onClick={() => onDeleteTask(task.id)}
+              >
+                Delete
+              </button>
+            </li>
           ))}
         </ul>
       )}
